@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+.venv/
+dist/
+build/
+*.log
+*.pem
+*.key
+secrets.*
+private/
+data/raw/
+artifacts/traces/
