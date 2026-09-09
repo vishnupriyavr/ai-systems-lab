@@ -1,6 +1,6 @@
 # Results Template
 
-Status: no public benchmark results yet.
+Week 2 baseline results are published in [week-02-baselines.md](week-02-baselines.md). Use this template for subsequent experiments.
 
 | System | Dataset version | Primary quality metric | p95 latency | Cost / 10k | Notes |
 | --- | --- | ---: | ---: | ---: | --- |

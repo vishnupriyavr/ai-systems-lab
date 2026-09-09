@@ -6,8 +6,9 @@
 | --- | --- | --- |
 | Ingest | Accept allow-listed public or synthetic alerts | No real tenant data |
 | Normalization | Map supported fields to OCSF 1.8.0 | Reject or quarantine invalid input |
-| Router | Produce structured severity, disposition, ATT&CK candidates, and route | Compared against deterministic rules |
+| Router | Propose structured severity, disposition, scenario, and route | Compared against deterministic rules |
 | MCP | Expose narrow, typed, read-only SOC capabilities | Policy enforced outside model output |
+| ATT&CK mapping | Resolve supported candidates from a versioned catalogue | Deterministic and evidence-linked |
 | Retrieval | Return versioned evidence from controlled sources | Retrieved text remains untrusted data |
 | Synthesis | Summarize evidence and surface uncertainty | No unsupported operational claims |
 | Authority | Record analyst approval or rejection | Recommendation is never execution |
@@ -19,3 +20,5 @@ Alerts and retrieved text can contain prompt injection, malformed fields, mislea
 ## MCP shape
 
 The server is intentionally thin. Domain services own normalization, routing, retrieval, and policy; MCP provides discoverable typed contracts. This keeps evaluation possible without coupling results to one client and allows a later private MCP app without redesigning the domain boundary.
+
+Week 2 showed that the model should be treated as a proposal generator. Application policy owns the final route, and the versioned deterministic catalogue owns authoritative ATT&CK candidates. The current retrieval tools are implemented independently; automated route-triggered RAG synthesis remains target architecture, not a completed capability.
