@@ -1,6 +1,11 @@
 # Results Template
 
-Week 2 baseline results are published in [week-02-baselines.md](week-02-baselines.md). Use this template for subsequent experiments.
+Published results:
+
+- [Week 2 rules versus prompted-model baselines](week-02-baselines.md)
+- [Week 3 parameter-efficient fine-tuning](week-03-peft.md)
+
+Use this template for subsequent experiments.
 
 | System | Dataset version | Primary quality metric | p95 latency | Cost / 10k | Notes |
 | --- | --- | ---: | ---: | ---: | --- |

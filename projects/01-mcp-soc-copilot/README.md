@@ -12,7 +12,7 @@ V1 compares deterministic rules, prompted small language models, and—only if e
 
 ## Current snapshot
 
-Completed in the private implementation repository through Week 2:
+Completed in the private implementation repository through Week 3:
 
 - 8 supported alert scenarios
 - 50 synthetic golden evaluation alerts
@@ -20,7 +20,10 @@ Completed in the private implementation repository through Week 2:
 - 8 thin, typed, read-only FastMCP tool contracts
 - implemented normalization, extraction, triage, policy, and retrieval services
 - frozen 18-alert held-out comparison of rules and a prompted local 7B model
-- 134 passing automated tests, repository-wide linting, and strict type checking across 44 source files
+- a separate 960-example synthetic SFT corpus with template-family-separated splits
+- controlled LoRA and DoRA experiments on a local Qwen 2.5 3B model
+- 96-case controlled challenge and 16-case independently authored robustness suite
+- deterministic governance, evidence-reference validation, and fail-closed malformed-input handling
 
 These figures describe private verification. The implementation, fixtures, prompts, per-alert reports, and detailed control logic are intentionally not published here.
 
@@ -38,6 +41,14 @@ For the frozen V1 scenarios, deterministic rules were both more accurate and muc
 
 These are directional prototype results from 18 synthetic held-out alerts. They are not production-performance claims. See [evaluation/week-02-baselines.md](evaluation/week-02-baselines.md) for the full aggregate report and limitations.
 
+## Week 3 result
+
+LoRA learned the bounded synthetic task, but independent evaluation prevented an overclaim. It achieved 100% raw routing on the 96-case controlled challenge and 87.5% on 16 independently authored cases. Deterministic governance contained both independent high-risk failures, but did not make the raw model correct.
+
+DoRA matched LoRA's quality and repeated its failures while increasing local inference latency and peak memory. LoRA therefore earned only a conditional role as an untrusted proposal component. Production and autonomous routing remain a no-go.
+
+See [evaluation/week-03-peft.md](evaluation/week-03-peft.md) for the aggregate comparison and [architecture/week-03-responsibility-boundary.md](architecture/week-03-responsibility-boundary.md) for ownership and release gates.
+
 ## Architecture
 
 ```mermaid
@@ -52,7 +63,7 @@ flowchart LR
     H -->|approve or reject| I[Audited decision]
 ```
 
-See [architecture/overview.md](architecture/overview.md) for boundaries, [architecture/week-02-current-state.md](architecture/week-02-current-state.md) for the implemented/target distinction, and [evaluation/methodology.md](evaluation/methodology.md) for the comparison plan.
+See [architecture/overview.md](architecture/overview.md) for boundaries, [architecture/week-03-responsibility-boundary.md](architecture/week-03-responsibility-boundary.md) for the current authority model, and [evaluation/methodology.md](evaluation/methodology.md) for the comparison plan.
 
 ## Explicit exclusions
 
@@ -73,6 +84,6 @@ See [architecture/overview.md](architecture/overview.md) for boundaries, [archit
 - `threat-model/` — public, high-level risk summary
 - `weekly-updates/` — evidence-backed sprint notes
 
-## Week 3 decision
+## Week 4 direction
 
-Run a bounded supervised LoRA/QLoRA experiment only after creating a separate training corpus and untouched challenge set. DPO is conditional on later preference-ranking errors; GRPO and production model routing remain out of scope for V1. Rules, safety policy, and authoritative ATT&CK mapping remain deterministic.
+Integrate the validated pieces into one auditable MCP workflow and compare retrieval-only, fine-tuned-only, and combined paths on grounding, safety, latency, throughput, and cost. No remediation tool will be introduced in V1.

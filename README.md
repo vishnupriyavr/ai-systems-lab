@@ -8,7 +8,7 @@ This repository publishes architecture, decision records, evaluation methods, an
 
 | Project | Question | Status |
 | --- | --- | --- |
-| [MCP-Based SOC Copilot](projects/01-mcp-soc-copilot/README.md) | How should rules, small language models, retrieval, and human authority divide SOC triage work? | Week 2 complete |
+| [MCP-Based SOC Copilot](projects/01-mcp-soc-copilot/README.md) | How should rules, small language models, retrieval, and human authority divide SOC triage work? | Week 3 complete |
 
 ## Disclosure boundary
 
