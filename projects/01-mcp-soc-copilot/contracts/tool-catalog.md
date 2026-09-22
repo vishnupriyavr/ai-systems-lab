@@ -10,8 +10,8 @@ These are illustrative public contracts, not callable endpoints or source code.
 | `map_attack` | Propose ATT&CK candidates | technique IDs with evidence |
 | `retrieve_threat_context` | Retrieve controlled security knowledge | versioned evidence snippets |
 | `retrieve_asset_context` | Retrieve synthetic asset context | criticality and ownership metadata |
-| `recommend_action` | Suggest a playbook-aligned next step | recommendation and required review |
-| `create_approval_record` | Record a proposed human decision | pending audit record; no action execution |
+| `retrieve_incident_history` | Retrieve linked synthetic incidents | versioned incident summaries |
+| `retrieve_playbook` | Retrieve advisory response guidance | versioned, non-executable playbook context |
 
 ## Example
 
@@ -33,4 +33,4 @@ These are illustrative public contracts, not callable endpoints or source code.
 }
 ```
 
-Field names and values are deliberately simplified. Operational schemas, validation details, prompts, thresholds, and transport configuration are private.
+Field names and values are deliberately simplified. Operational schemas, validation details, prompts, thresholds, and transport configuration are private. Human decisions and audit binding occur in typed application services, not through an execution-capable MCP tool.
