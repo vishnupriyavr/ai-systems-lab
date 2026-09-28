@@ -9,6 +9,7 @@ This repository publishes architecture, decision records, evaluation methods, an
 | Project | Question | Status |
 | --- | --- | --- |
 | [MCP-Based SOC Copilot](projects/01-mcp-soc-copilot/README.md) | How should rules, small language models, retrieval, and human authority divide SOC triage work? | Four-week sprint complete |
+| [LLM Release Engineering Lab](projects/02-llm-release-engineering/README.md) | What evidence and controls should an AI change satisfy before progressive delivery? | Week 1 complete |
 
 ## Disclosure boundary
 
