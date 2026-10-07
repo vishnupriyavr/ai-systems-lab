@@ -20,7 +20,12 @@
 | Model judge rubber-stamps a candidate | Semantic judging remains advisory until human-calibrated |
 | Test-set leakage inflates results | Separated calibration, regression, and challenge roles; labels excluded from candidate context |
 | Package is interpreted as deployment approval | Separate package identity from policy decision and promotion authorization |
+| Failed candidate changes desired state | Guard GitOps updates with a versioned decision bound to the candidate identity |
+| Offline pass bypasses staged observation | Authorize only canary entry; require fresh analysis at each stage |
+| Stale or synthetic metrics produce a false promotion | Bind analysis evidence to rollout revision and preserve transition records |
+| Failed rollout disrupts the stable service | Abort the candidate and retain the prior healthy ReplicaSet |
+| Production failures poison future evaluation data | Quarantine failures for review before dataset admission |
 
 ## Residual risk
 
-Hashes show that evaluated artifacts have not changed; they do not prove that the workload is representative, labels are correct, or implementation is secure. A single offline run cannot characterize nondeterminism, provider drift, or operational rollback behavior. Week 1 therefore supports an offline decision only, not production authorization.
+Hashes show that evaluated artifacts have not changed; they do not prove that the workload is representative, labels are correct, or implementation is secure. A small offline sample cannot characterize nondeterminism or provider drift. The Week 2 rollback used simulated telemetry and a generic service, so it validates the lab control path rather than production SOC reliability.
