@@ -9,7 +9,8 @@ This repository publishes architecture, decision records, evaluation methods, an
 | Project | Question | Status |
 | --- | --- | --- |
 | [MCP-Based SOC Copilot](projects/01-mcp-soc-copilot/README.md) | How should rules, small language models, retrieval, and human authority divide SOC triage work? | Four-week sprint complete |
-| [LLM Release Engineering Lab](projects/02-llm-release-engineering/README.md) | What evidence and controls should an AI change satisfy before progressive delivery? | Week 2 complete |
+| [LLM Release Engineering Lab](projects/02-llm-release-engineering/README.md) | What evidence and controls should an AI change satisfy before progressive delivery? | Two week sprint complete |
+| [Predictive Context Voice Runtime Lab](projects/03-predictive-context-voice/README.md) | Can preparing authorized context early reduce voice response latency? | Week 1 local baseline complete |
 
 ## Disclosure boundary
 
