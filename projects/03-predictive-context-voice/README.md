@@ -2,7 +2,7 @@
 
 Can a voice assistant prepare the context it will need next before the user finishes speaking, while preserving authorization, grounding and a safe reactive fallback?
 
-Week 1 established the reactive baseline and instrumentation needed to test that question. The local baseline closed on **22 October 2026**. Week 2 added a minimal predictive context experiment. These artifacts report the first two weeks; later implementation work is outside their scope.
+Week 1 established the reactive baseline and instrumentation needed to test that question. The local baseline closed on **22 October 2026**. Week 2 added a minimal predictive context experiment. Week 3 compared predictors, calibration and robustness, ending with an adjust decision: continue the learned predictor in shadow mode. These artifacts report the first three weeks.
 
 ## Reference workload
 
@@ -23,6 +23,23 @@ The 10 narrow audio fixtures achieved 10/10 retrieval matches. The separate tick
 Week 2 added 50 owner-reviewed synthetic conversations, rules and transition-frequency predictors, asynchronous authorized prefetch, and a scoped one-use cache with consumption-time checks. Review was owner glance approval, not an independent detailed audit.
 
 A paired replay over 200 turns reported 100% next-state top-k recall and 100% modelled context usefulness, with mean latency changing from 37.4 to 10.45 ms under a deterministic cost model. These are source-linked pipeline checks: the graph and benchmark share a source, and the replay models reuse rather than executing the full prefetch/cache lifecycle. They do not establish independent prediction quality or measured voice speedup. See [Week 2 results](evaluation/week-02-results.md).
+
+## Week 3 result
+
+Rules, transition-frequency lookup and transcript-only logistic regression each matched 40/40 synthetic challenge turns. Under simulated ASR revisions, the learned predictor fell to 28/40 (70%), including four high-confidence errors. Rules and graph lookup retained correct structured scenario/state inputs, so their text-perturbation stability is not an equal-input generalization win.
+
+**Decision: adjust; continue logistic regression in shadow mode**, with rules, then Markov when available, then reactive retrieval as the documented fallback chain. Jev remains `INSUFFICIENT_EVIDENCE`: no live outputs were collected. Local candidate packages preserve evidence, but do not authorize promotion. See [Week 3 evaluation](evaluation/week-03-results.md).
+
+## Week 3 public artifacts
+
+- [Week 3 engineering update](weekly-updates/week-03.md)
+- [Predictor comparison architecture](architecture/week-03-predictor-comparison.md)
+- [Learned predictor and evaluation data card](datasets/learned-predictor-v0.1.md)
+- [Week 3 matched comparison](evaluation/week-03-results.md)
+- [Calibration, robustness and graph ablation](evaluation/week-03-robustness.md)
+- [Keep the learned predictor in shadow mode](decisions/0005-keep-learned-predictor-in-shadow.md)
+- [Week 3 safety evidence and gaps](threat-model/week-03-model-risk.md)
+- [Week 3 social-post draft](communications/week-03-linkedin.md)
 
 ## Week 2 public artifacts
 
@@ -48,6 +65,6 @@ A paired replay over 200 turns reported 100% next-state top-k recall and 100% mo
 
 ## Next experiment
 
-At Week 2 close, the next priorities were independent evaluation cases and measured runtime latency, followed by live voice evidence and completion of predictive Release Lab integration. The intended success measure remains lower end-of-speech-to-first-audio p95 without degrading quality or exposing unauthorized context. Neither week's local experiment establishes that outcome.
+At Week 3 close, the next priorities were stronger ASR-revision handling, independent conversations, matched live Jev evidence and full release-framework validation. Local predictor timing is now recorded, but live end-of-speech-to-first-audio p95 and end-to-end predictive benefit remain unmeasured. The intended success measure remains lower voice latency without degrading quality or exposing unauthorized context.
 
 This public package contains engineering summaries and aggregate evidence. Complete fixtures, traces, labels, prompts, implementation and operational policy internals remain private under the repository's [disclosure policy](../../DISCLOSURE.md).
